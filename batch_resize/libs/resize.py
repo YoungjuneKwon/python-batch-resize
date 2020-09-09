@@ -32,5 +32,3 @@ def resize_and_crop(org, dst, size, center=(0.5, 0.5)):
     i2 = img.resize(s1).crop((d[0] - c[0], d[1] - c[1], s1[0] - d[0] - c[0], s1[1] - d[1] - c[1]))
     restore_rotation(i2.resize(size)).save(validate_path(dst), 'JPEG', optimize=True, exif=img.info['exif'], icc_profile = img.info.get('icc_profile',''), subsampling=JIP.get_sampling(img))
     return i2
-
-resize_and_crop('/Users/shining/Desktop/prac/org.jpg', '/Users/shining/Desktop/prac/res/org.jpg', (1000, 1000), (0.5, 0.4))

@@ -8,17 +8,13 @@ class Context:
     self._init_src_folders()
 
   def run(self):
-    for i, ctx in enumerate(self.config['sizes']):
-      print(f'{i+1} / {len(self.config["sizes"])}, {ctx["path"]}')
-      self.run_with(ctx)
-
-  def run_with(self, ctx):
     from resize import validate_path, resize_and_crop
     for s in self.srcs:
-      abss = self._abstract_src(s)
-      ss = sorted([s for s in os.listdir(abss) if s.lower().endswith('jpg') or s.lower().endswith('jpeg')])
-      dst = validate_path(os.path.sep.join([self.config["dest"], s, ctx["path"].replace('/', os.path.sep)]))
-      [resize_and_crop(os.path.sep.join([abss, s]), os.path.sep.join([dst, s]), ctx["size"]) for s in ss[:(ctx['count'] if ctx['count'] > 0 else len(ss))]]
+      for ctx in self.config['sizes']:
+        abss = self._abstract_src(s)
+        ss = sorted([s for s in os.listdir(abss) if s.lower().endswith('jpg') or s.lower().endswith('jpeg')])
+        dst = validate_path(os.path.sep.join([self.config['dest'], s, ctx['path'].replace('/', os.path.sep)]))
+        [resize_and_crop(os.path.sep.join([abss, s]), os.path.sep.join([dst, s]), ctx['size'], ctx.get('center', (0.5, 0.5))) for s in ss[:(ctx['count'] if ctx['count'] > 0 else len(ss))]]
       
   def _abstract_src(self, s):
     return f'{self.src}{os.path.sep}{s}'

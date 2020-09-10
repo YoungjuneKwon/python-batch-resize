@@ -1,2 +1,10 @@
 
 *.pyc
+dist/batch_resize-1.0.0.tar.gz
+dist/batch_resize-1.0.0-py3-none-any.whl
+build/lib/batch_resize/__main__.py
+build/lib/batch_resize/__init__.py
+batch_resize.egg-info/top_level.txt
+batch_resize.egg-info/SOURCES.txt
+batch_resize.egg-info/PKG-INFO
+batch_resize.egg-info/dependency_links.txt

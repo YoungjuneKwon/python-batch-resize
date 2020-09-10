@@ -52,3 +52,33 @@ By designating a specific folder, resize and crop all images in the sub folders 
             +- image-3.jpg
             +- image-4.jpg
     ~~~
+
+# config.json
+In the config.json file, you can specify the folder location where the converted images are to be saved, information on the size to be converted, and settings related to the center point when cropping.
+
+config.json file is as follows:
+  | | ||
+  |---|---|---|
+  | dest || The folder where the entire result will be saved. If it starts with "./" or "../", it is treated as a relative path from the source folder. |
+  | sized || Array of target sizes |
+  || size | (Required) Target size [width, height] |
+  || count | The number of images to convert. The image files in the folder are sorted in ascending order and imported from the front. If it's 0, it gets all. |
+  || path | The name of the folder in which to save the converted result to that size. If not specified, a folder in the form of {width}x{height} is created using the width and height values ​​specified in size by default. |
+  || center | The ratio of the center point during crop processing. The default is [0.5, 0.5]. It represents the horizontal and vertical center points, respectively. The range is 0 to 1. The closer the number is to 1, the closer it is to the right and the bottom. |
+
+# Command Line
+You can also do it without writing config.json with a simple command like this:
+
+    python -m batch_resize folder-a 960 1280
+
+The output is created as follows under folder-a.
+
+    +- folder-a
+      +- subfolder-a
+      | +- 960x1280
+      | +- image-1.jpg
+      | +- image-2.jpg
+      +- subfolder-b
+         +- 960x1280
+            +- image-3.jpg
+            +- image-4.jpg
